@@ -68,8 +68,8 @@ function send_discord(string $message, string $context = 'unknown'): void
 
 function send_whatsapp_meta(string $message, string $context = 'unknown'): void
 {
-    $token = config('whatsapp.meta_token');
-    $phoneId = config('whatsapp.meta_phone_id');
+    $token = config('whatsapp.cloud_api_access_token');
+    $phoneId = config('whatsapp.cloud_api_phone_id');
     $adminNumber = config('whatsapp.admin_number');
 
     if (!$token || !$phoneId || !$adminNumber) {
