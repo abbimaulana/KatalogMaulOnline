@@ -1,0 +1,54 @@
+<?php
+
+declare(strict_types=1);
+
+define('BASE_PATH', dirname(__DIR__));
+
+$config = require BASE_PATH . '/core/config.php';
+
+if (!empty($config['app']['timezone'])) {
+    date_default_timezone_set($config['app']['timezone']);
+}
+
+$cookieSecure = (bool) ($config['security']['cookie_secure'] ?? false);
+$cookieSameSite = $config['security']['cookie_samesite'] ?? 'Lax';
+
+session_name($config['security']['session_name'] ?? 'maul_session');
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'domain' => '',
+        'secure' => $cookieSecure,
+        'httponly' => true,
+        'samesite' => $cookieSameSite,
+    ]);
+    session_start();
+}
+
+$scheme = 'http';
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+    $scheme = 'https';
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+    $scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
+} elseif (!empty($_SERVER['HTTP_CF_VISITOR'])) {
+    $cf = json_decode($_SERVER['HTTP_CF_VISITOR'], true);
+    if (!empty($cf['scheme'])) {
+        $scheme = $cf['scheme'];
+    }
+}
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$baseUrl = trim($config['app']['base_url'] ?? '');
+if ($baseUrl === '') {
+    $baseUrl = $scheme . '://' . $host;
+}
+
+define('BASE_URL', rtrim($baseUrl, '/'));
+
+require BASE_PATH . '/core/db.php';
+require BASE_PATH . '/core/helpers.php';
+require BASE_PATH . '/core/security.php';
+require BASE_PATH . '/core/store.php';
+require BASE_PATH . '/core/upload.php';
+require BASE_PATH . '/core/webhooks.php';
+require BASE_PATH . '/core/auth.php';
