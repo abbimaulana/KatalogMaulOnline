@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1120" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <title>Admin Dashboard · Maul Online Shop</title>
+</head>
+<body class="page" data-page="admin-dashboard">
+  <div id="loader"><div class="loader-ring"></div></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <div>
+          <div>Maul Online Shop</div>
+          <small class="muted">Admin Dashboard</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="/admin/index.html" data-transition>Dashboard</a>
+        <a href="/admin/kelola.html" data-transition>Kelola Produk</a>
+        <a href="/views/index.html" data-transition>Preview Toko</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container">
+      <div class="section-title">
+        <h2>Jam Operasional & Status Toko</h2>
+      </div>
+      <form id="config-form" class="form-grid">
+        <div class="form-control">
+          <label for="store-mode">Mode Operasional</label>
+          <select id="store-mode">
+            <option value="auto">Otomatis (Berdasarkan Jam)</option>
+            <option value="manual">Manual (Toggle)</option>
+          </select>
+        </div>
+        <div class="form-control">
+          <label for="store-status">Status Manual</label>
+          <select id="store-status">
+            <option value="open">Toko Buka</option>
+            <option value="closed">Toko Tutup</option>
+          </select>
+        </div>
+        <div class="form-control">
+          <label for="store-open">Jam Buka (WIB)</label>
+          <input type="time" id="store-open" value="08:00" />
+        </div>
+        <div class="form-control">
+          <label for="store-close">Jam Tutup (WIB)</label>
+          <input type="time" id="store-close" value="22:00" />
+        </div>
+        <button class="btn" id="config-submit" type="submit">Simpan Pengaturan</button>
+      </form>
+    </section>
+
+    <section class="section container">
+      <div class="section-title">
+        <h2>Pengaturan Pembayaran</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>QRIS</h3>
+          <img id="qris-preview" src="/assets/images/placeholder.svg" alt="QRIS" />
+          <input id="qris-upload" type="file" accept="image/*" style="margin-top:12px;" />
+        </div>
+        <div class="info-card">
+          <h3>Rekening & E-Wallet</h3>
+          <div class="form-grid">
+            <div class="form-control">
+              <label for="payment-bsi">No Rek BSI</label>
+              <input id="payment-bsi" type="text" placeholder="BSI 7xxxxxxxx" />
+            </div>
+            <div class="form-control">
+              <label for="payment-dana">DANA</label>
+              <input id="payment-dana" type="text" placeholder="08xxxxxxxx" />
+            </div>
+            <div class="form-control">
+              <label for="payment-ovo">OVO</label>
+              <input id="payment-ovo" type="text" placeholder="08xxxxxxxx" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 Maul Online Shop. Proudly powered by GitHub, Cloudflare & Google.
+  </footer>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>

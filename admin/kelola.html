@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1120" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <title>Kelola Produk · Maul Online Shop</title>
+</head>
+<body class="page" data-page="admin-products">
+  <div id="loader"><div class="loader-ring"></div></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <div>
+          <div>Maul Online Shop</div>
+          <small class="muted">Kelola Produk</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="/admin/index.html" data-transition>Dashboard</a>
+        <a href="/admin/kelola.html" data-transition>Kelola Produk</a>
+        <a href="/views/index.html" data-transition>Preview Toko</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container">
+      <div class="section-title">
+        <h2>Daftar Produk</h2>
+        <button class="btn" id="add-product">Tambah Produk</button>
+      </div>
+      <div class="card" style="overflow:auto;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>Nama</th>
+              <th>Harga</th>
+              <th>Bayar Langsung</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="products-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="product-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>Form Produk</h3>
+          <p class="muted">Lengkapi informasi layanan PPOB.</p>
+        </div>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <form id="product-form" class="form-grid">
+        <div class="form-control">
+          <label for="product-name">Nama Layanan</label>
+          <input id="product-name" type="text" required />
+        </div>
+        <div class="form-control">
+          <label for="product-desc">Deskripsi</label>
+          <textarea id="product-desc" rows="3"></textarea>
+        </div>
+        <div class="form-control">
+          <label for="product-price">Harga</label>
+          <input id="product-price" type="number" min="0" required />
+        </div>
+        <div class="form-control">
+          <label for="product-direct">Bayar Langsung</label>
+          <select id="product-direct">
+            <option value="yes">Aktif</option>
+            <option value="no">Nonaktif</option>
+          </select>
+        </div>
+        <div class="form-control">
+          <label for="product-active">Status Produk</label>
+          <select id="product-active">
+            <option value="yes">Aktif</option>
+            <option value="no">Nonaktif</option>
+          </select>
+        </div>
+        <div class="form-control">
+          <label for="product-image">Gambar Produk</label>
+          <input id="product-image" type="file" accept="image/*" />
+          <img id="product-preview" src="/assets/images/placeholder.svg" alt="Preview" style="margin-top:12px;" />
+        </div>
+        <button class="btn" type="submit">Simpan Produk</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    © 2026 Maul Online Shop. Proudly powered by GitHub, Cloudflare & Google.
+  </footer>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>
