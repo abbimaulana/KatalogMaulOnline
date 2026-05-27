@@ -61,6 +61,7 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
    - Edit `core/config.php`:
      - `db.host`, `db.name`, `db.user`, `db.pass`
      - `bots.telegram_token`, `bots.telegram_chat_id`, `bots.discord_webhook_url` (isi jika memakai bot)
+     - `whatsapp.admin_number`, `whatsapp.meta_phone_id`, `whatsapp.meta_token` (untuk notifikasi WA admin via Meta)
      - `payment.*` (rekening & QRIS)
      - `security.csrf_key` (**wajib isi** dengan string acak)
    - Opsional: set `app.base_url` jika ingin fixed URL.
@@ -103,13 +104,18 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
 2. Copy Webhook URL.
 3. Isi di `core/config.php`.
 
+### WhatsApp (Meta Cloud API)
+1. Buat aplikasi WhatsApp Cloud API di Meta.
+2. Ambil **Phone Number ID** dan **Access Token**.
+3. Isi `whatsapp.meta_phone_id`, `whatsapp.meta_token`, dan `whatsapp.admin_number` di `core/config.php`.
+
 ## Alur Checkout
 1. Pembeli isi form di `/catalog`.
 2. Sistem membuat order & mengecek `is_direct_payment`:
    - **Aktif** → `/checkout_payment`
    - **Nonaktif** → `/checkout_confirm`
 3. Setelah klik konfirmasi, sistem:
-   - Kirim notifikasi ke Telegram & Discord.
+   - Kirim notifikasi ke Telegram, Discord, & WhatsApp admin.
    - Redirect ke WA bot CS `6287872369848` dengan template pesan.
 
 ## Maintenance Mode

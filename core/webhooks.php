@@ -8,6 +8,7 @@ function notify_order(array $order): void
     $context = $order['order_code'] ?? $order['public_id'] ?? 'unknown';
     send_telegram($message, $context);
     send_discord($message, $context);
+    send_whatsapp_meta($message, $context);
 }
 
 function send_telegram(string $message, string $context = 'unknown'): void
@@ -61,6 +62,53 @@ function send_discord(string $message, string $context = 'unknown'): void
     $result = curl_exec($ch);
     if ($result === false) {
         error_log('Discord webhook failed for order ' . $context . ': ' . curl_error($ch));
+    }
+    curl_close($ch);
+}
+
+function send_whatsapp_meta(string $message, string $context = 'unknown'): void
+{
+    $token = config('whatsapp.meta_token');
+    $phoneId = config('whatsapp.meta_phone_id');
+    $adminNumber = config('whatsapp.admin_number');
+
+    if (!$token || !$phoneId || !$adminNumber) {
+        return;
+    }
+
+    $target = preg_replace('/\D/', '', (string) $adminNumber);
+    if ($target === '') {
+        return;
+    }
+
+    $url = 'https://graph.facebook.com/v19.0/' . $phoneId . '/messages';
+    $payload = json_encode([
+        'messaging_product' => 'whatsapp',
+        'to' => $target,
+        'type' => 'text',
+        'text' => ['body' => $message],
+    ], JSON_UNESCAPED_UNICODE);
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => $payload,
+        CURLOPT_HTTPHEADER => [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $token,
+        ],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_TIMEOUT => 10,
+    ]);
+    $result = curl_exec($ch);
+    if ($result === false) {
+        error_log('WhatsApp meta webhook failed for order ' . $context . ': ' . curl_error($ch));
+    } else {
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if ($status >= 400) {
+            error_log('WhatsApp meta webhook failed for order ' . $context . ': HTTP ' . $status . ' ' . $result);
+        }
     }
     curl_close($ch);
 }

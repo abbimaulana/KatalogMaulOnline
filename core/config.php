@@ -41,5 +41,7 @@ return [
     'whatsapp' => [
         'customer_bot' => '6287872369848',
         'admin_number' => '6287864865721',
+        'meta_phone_id' => '',
+        'meta_token' => '',
     ],
 ];
