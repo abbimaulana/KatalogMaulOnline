@@ -14,7 +14,7 @@ function send_telegram(string $message): void
     $token = config('bots.telegram_token');
     $chatId = config('bots.telegram_chat_id');
 
-    if (!$token || !$chatId || str_contains($token, 'ISI_TOKEN')) {
+    if (!$token || !$chatId) {
         return;
     }
 
@@ -39,7 +39,7 @@ function send_telegram(string $message): void
 function send_discord(string $message): void
 {
     $webhook = config('bots.discord_webhook_url');
-    if (!$webhook || str_contains($webhook, 'ISI_WEBHOOK')) {
+    if (!$webhook) {
         return;
     }
 

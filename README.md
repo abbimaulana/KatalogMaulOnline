@@ -60,14 +60,18 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
 4. **Konfigurasi aplikasi**:
    - Edit `core/config.php`:
      - `db.host`, `db.name`, `db.user`, `db.pass`
-     - `bots.telegram_token`, `bots.telegram_chat_id`, `bots.discord_webhook_url`
+     - `bots.telegram_token`, `bots.telegram_chat_id`, `bots.discord_webhook_url` (isi jika memakai bot)
      - `payment.*` (rekening & QRIS)
-     - `security.csrf_key` (wajib ganti)
+     - `security.csrf_key` (**wajib isi** dengan string acak)
    - Opsional: set `app.base_url` jika ingin fixed URL.
 5. **Setel admin**:
-   - Login default: `admin` / `admin123` (ubah segera).
-   - Ubah password dengan mengganti hash di tabel `admins`.
-     - Gunakan PHP: `password_hash('password_baru', PASSWORD_DEFAULT)`.
+   - Buat akun admin manual (tidak ada default password).
+   - Contoh insert di phpMyAdmin:
+     ```sql
+     INSERT INTO admins (username, password_hash)
+     VALUES ('admin', 'HASIL_PASSWORD_HASH');
+     ```
+   - Gunakan PHP: `password_hash('password_baru', PASSWORD_DEFAULT)` untuk membuat hash.
 6. **Cloudflare (Strict SSL)**:
    - Aktifkan **Full (Strict)**.
    - Pastikan DNS mengarah ke InfinityFree.

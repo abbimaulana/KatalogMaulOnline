@@ -19,7 +19,7 @@ return [
     ],
     'security' => [
         'session_name' => 'maul_session',
-        'csrf_key' => 'ganti_dengan_kunci_rahasia',
+        'csrf_key' => '',
         'cookie_secure' => true,
         'cookie_samesite' => 'Lax',
     ],
@@ -28,9 +28,9 @@ return [
         'allowed_ext' => ['jpg', 'jpeg', 'png', 'webp'],
     ],
     'bots' => [
-        'telegram_token' => 'ISI_TOKEN_TELEGRAM',
-        'telegram_chat_id' => 'ISI_CHAT_ID_TELEGRAM',
-        'discord_webhook_url' => 'ISI_WEBHOOK_DISCORD',
+        'telegram_token' => '',
+        'telegram_chat_id' => '',
+        'discord_webhook_url' => '',
     ],
     'payment' => [
         'bank_name' => 'BCA',
@@ -40,7 +40,7 @@ return [
     ],
     'admin' => [
         'default_username' => 'admin',
-        'default_password_hash' => '$2y$10$oHgwlD735znqpQR9jkasWecfKE7qxIaqKSH4KglVz45sDQrOHJCiy',
+        'default_password_hash' => '',
     ],
     'whatsapp' => [
         'customer_bot' => '6287872369848',

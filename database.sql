@@ -46,8 +46,5 @@ CREATE TABLE orders (
     CONSTRAINT fk_orders_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO admins (username, password_hash) VALUES
-('admin', '$2y$10$oHgwlD735znqpQR9jkasWecfKE7qxIaqKSH4KglVz45sDQrOHJCiy');
-
 INSERT INTO payment_settings (bank_name, account_name, account_number, qris_image) VALUES
 ('BCA', 'Maul Online Shop', '1234567890', 'uploads/qris.png');

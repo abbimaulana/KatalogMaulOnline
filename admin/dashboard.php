@@ -4,9 +4,29 @@ $pageTitle = 'Dashboard';
 $productsCount = count_products();
 $ordersCount = count_orders();
 $orders = list_orders(5);
+$securityWarnings = [];
+
+if (config('security.csrf_key') === '') {
+    $securityWarnings[] = 'Isi security.csrf_key di core/config.php dengan string acak.';
+}
+
+$adminCount = (int) db()->query('SELECT COUNT(*) FROM admins')->fetchColumn();
+if ($adminCount === 0) {
+    $securityWarnings[] = 'Belum ada akun admin. Tambahkan akun admin di tabel admins.';
+}
 include __DIR__ . '/partials/header.php';
 ?>
 <section class="section">
+    <?php if (!empty($securityWarnings)): ?>
+        <div class="hero-card" style="border-color: rgba(255, 204, 102, 0.5);">
+            <h3>Security Checklist</h3>
+            <ul style="color: var(--muted); line-height: 1.8; padding-left: 18px;">
+                <?php foreach ($securityWarnings as $warning): ?>
+                    <li><?= e($warning) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
     <div class="grid">
         <div class="card">
             <div class="card-body">

@@ -27,13 +27,17 @@ if (is_post()) {
         redirect($editing ? 'admin/products/edit?id=' . $productId : 'admin/products/create');
     }
 
-    $imagePath = handle_image_upload($_FILES['image'] ?? [], $product['image_path'] ?? null);
+    $upload = handle_image_upload($_FILES['image'] ?? [], $product['image_path'] ?? null);
+    if ($upload['error']) {
+        set_flash('error', $upload['error']);
+        redirect($editing ? 'admin/products/edit?id=' . $productId : 'admin/products/create');
+    }
 
     $data = [
         'name' => $name,
         'description' => $description,
         'price' => $price,
-        'image_path' => $imagePath,
+        'image_path' => $upload['path'],
         'is_direct_payment' => $directPayment,
         'is_active' => $isActive,
     ];

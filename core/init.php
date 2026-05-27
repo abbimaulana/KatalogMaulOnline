@@ -10,21 +10,7 @@ if (!empty($config['app']['timezone'])) {
     date_default_timezone_set($config['app']['timezone']);
 }
 
-$cookieSecure = (bool) ($config['security']['cookie_secure'] ?? false);
 $cookieSameSite = $config['security']['cookie_samesite'] ?? 'Lax';
-
-session_name($config['security']['session_name'] ?? 'maul_session');
-if (session_status() === PHP_SESSION_NONE) {
-    session_set_cookie_params([
-        'lifetime' => 0,
-        'path' => '/',
-        'domain' => '',
-        'secure' => $cookieSecure,
-        'httponly' => true,
-        'samesite' => $cookieSameSite,
-    ]);
-    session_start();
-}
 
 $scheme = 'http';
 if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
@@ -44,6 +30,22 @@ if ($baseUrl === '') {
 }
 
 define('BASE_URL', rtrim($baseUrl, '/'));
+
+$cookieSecure = (bool) ($config['security']['cookie_secure'] ?? false);
+$cookieSecure = $cookieSecure && $scheme === 'https';
+
+session_name($config['security']['session_name'] ?? 'maul_session');
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'domain' => '',
+        'secure' => $cookieSecure,
+        'httponly' => true,
+        'samesite' => $cookieSameSite,
+    ]);
+    session_start();
+}
 
 require BASE_PATH . '/core/db.php';
 require BASE_PATH . '/core/helpers.php';

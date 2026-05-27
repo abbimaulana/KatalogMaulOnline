@@ -13,13 +13,17 @@ if (is_post()) {
     $accountName = sanitize_text((string) request_value('account_name'));
     $accountNumber = sanitize_text((string) request_value('account_number'));
 
-    $qrisPath = handle_image_upload($_FILES['qris'] ?? [], $settings['qris_image'] ?? null);
+    $upload = handle_image_upload($_FILES['qris'] ?? [], $settings['qris_image'] ?? null);
+    if ($upload['error']) {
+        set_flash('error', $upload['error']);
+        redirect('admin/payments');
+    }
 
     save_payment_settings([
         'bank_name' => $bankName,
         'account_name' => $accountName,
         'account_number' => $accountNumber,
-        'qris_image' => $qrisPath,
+        'qris_image' => $upload['path'],
     ]);
 
     set_flash('success', 'Pengaturan pembayaran diperbarui.');

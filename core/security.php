@@ -5,7 +5,12 @@ declare(strict_types=1);
 function csrf_token(): string
 {
     if (empty($_SESSION['_token'])) {
-        $_SESSION['_token'] = bin2hex(random_bytes(32));
+        $seed = bin2hex(random_bytes(32));
+        $key = (string) config('security.csrf_key', '');
+        if ($key === '') {
+            $key = bin2hex(random_bytes(32));
+        }
+        $_SESSION['_token'] = hash_hmac('sha256', $seed, $key);
     }
     return $_SESSION['_token'];
 }

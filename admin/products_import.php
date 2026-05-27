@@ -28,10 +28,12 @@ if (is_post()) {
 
     $header = array_map('trim', $header);
     $count = 0;
+    $skipped = 0;
 
     while (($row = fgetcsv($handle)) !== false) {
         $data = array_combine($header, $row);
         if (!$data || empty($data['name'])) {
+            $skipped++;
             continue;
         }
 
@@ -48,6 +50,7 @@ if (is_post()) {
         ];
 
         if ($payload['name'] === '' || $payload['price'] <= 0) {
+            $skipped++;
             continue;
         }
 
@@ -64,7 +67,7 @@ if (is_post()) {
 
     fclose($handle);
 
-    set_flash('success', 'Import selesai. Total produk diproses: ' . $count);
+    set_flash('success', 'Import selesai. Berhasil: ' . $count . ' baris, dilewati: ' . $skipped . ' baris.');
     redirect('admin/products');
 }
 

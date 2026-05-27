@@ -20,23 +20,9 @@ include __DIR__ . '/partials/header.php';
                 <span style="color:var(--muted);">@maulshop</span>
             </div>
         </div>
+        <div style="margin-top:20px;">
+            <a class="btn" href="https://wa.me/6287872369848" target="_blank" rel="noopener">Chat via WhatsApp</a>
+        </div>
     </div>
-</section>
-<section class="section" data-aos="fade-up">
-    <form class="form" method="post" action="mailto:support@maulshop.local">
-        <div class="form-group">
-            <label>Nama</label>
-            <input type="text" placeholder="Nama lengkap">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="email@domain.com">
-        </div>
-        <div class="form-group">
-            <label>Pesan</label>
-            <textarea placeholder="Tulis pesan"></textarea>
-        </div>
-        <button class="btn" type="submit">Kirim Pesan</button>
-    </form>
 </section>
 <?php include __DIR__ . '/partials/footer.php'; ?>
