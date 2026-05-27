@@ -96,7 +96,11 @@ switch ($path) {
         update_order_status($orderId, $status);
         notify_order($order);
 
-        $waNumber = config('whatsapp.customer_bot');
+        $waNumber = preg_replace('/\\D/', '', (string) config('whatsapp.customer_bot'));
+        if ($waNumber === '') {
+            set_flash('error', 'Nomor WhatsApp belum disetel.');
+            redirect('catalog');
+        }
         $message = urlencode(build_wa_message($order));
         header('Location: https://wa.me/' . $waNumber . '?text=' . $message, true, 302);
         exit;

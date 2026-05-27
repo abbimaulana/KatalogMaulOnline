@@ -5,11 +5,12 @@ declare(strict_types=1);
 function notify_order(array $order): void
 {
     $message = build_wa_message($order);
-    send_telegram($message);
-    send_discord($message);
+    $context = $order['order_code'] ?? $order['public_id'] ?? 'unknown';
+    send_telegram($message, $context);
+    send_discord($message, $context);
 }
 
-function send_telegram(string $message): void
+function send_telegram(string $message, string $context = 'unknown'): void
 {
     $token = config('bots.telegram_token');
     $chatId = config('bots.telegram_chat_id');
@@ -34,12 +35,12 @@ function send_telegram(string $message): void
     ]);
     $result = curl_exec($ch);
     if ($result === false) {
-        error_log('Telegram webhook failed: ' . curl_error($ch));
+        error_log('Telegram webhook failed for order ' . $context . ': ' . curl_error($ch));
     }
     curl_close($ch);
 }
 
-function send_discord(string $message): void
+function send_discord(string $message, string $context = 'unknown'): void
 {
     $webhook = config('bots.discord_webhook_url');
     if (!$webhook) {
@@ -59,7 +60,7 @@ function send_discord(string $message): void
     ]);
     $result = curl_exec($ch);
     if ($result === false) {
-        error_log('Discord webhook failed: ' . curl_error($ch));
+        error_log('Discord webhook failed for order ' . $context . ': ' . curl_error($ch));
     }
     curl_close($ch);
 }

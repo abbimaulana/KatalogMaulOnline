@@ -34,6 +34,18 @@ define('BASE_URL', rtrim($baseUrl, '/'));
 $cookieSecure = (bool) ($config['security']['cookie_secure'] ?? false);
 $cookieSecure = $cookieSecure && $scheme === 'https';
 
+if (($config['security']['csrf_key'] ?? '') === '') {
+    error_log('SECURITY WARNING: security.csrf_key is empty. Set a strong random key in core/config.php.');
+}
+
+if (($config['db']['pass'] ?? '') === '') {
+    error_log('SECURITY WARNING: Database password is empty. Update core/config.php for production.');
+}
+
+if (($config['security']['cookie_secure'] ?? false) && $scheme !== 'https') {
+    error_log('SECURITY WARNING: HTTPS not detected, secure cookies disabled for this request.');
+}
+
 session_name($config['security']['session_name'] ?? 'maul_session');
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([

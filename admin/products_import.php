@@ -29,11 +29,15 @@ if (is_post()) {
     $header = array_map('trim', $header);
     $count = 0;
     $skipped = 0;
+    $skippedRows = [];
+    $rowIndex = 1;
 
     while (($row = fgetcsv($handle)) !== false) {
+        $rowIndex++;
         $data = array_combine($header, $row);
         if (!$data || empty($data['name'])) {
             $skipped++;
+            $skippedRows[] = $rowIndex;
             continue;
         }
 
@@ -51,6 +55,7 @@ if (is_post()) {
 
         if ($payload['name'] === '' || $payload['price'] <= 0) {
             $skipped++;
+            $skippedRows[] = $rowIndex;
             continue;
         }
 
@@ -67,7 +72,12 @@ if (is_post()) {
 
     fclose($handle);
 
-    set_flash('success', 'Import selesai. Berhasil: ' . $count . ' baris, dilewati: ' . $skipped . ' baris.');
+    $message = 'Import selesai. Berhasil: ' . $count . ' baris, dilewati: ' . $skipped . ' baris.';
+    if ($skipped > 0) {
+        $preview = array_slice($skippedRows, 0, 5);
+        $message .= ' Baris terlewat: ' . implode(', ', $preview) . (count($skippedRows) > 5 ? '...' : '') . '.';
+    }
+    set_flash('success', $message);
     redirect('admin/products');
 }
 

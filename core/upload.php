@@ -25,6 +25,7 @@ function handle_image_upload(array $file, ?string $existingPath = null): array
 
     $info = @getimagesize($file['tmp_name']);
     if ($info === false) {
+        error_log('Upload image validation failed for file: ' . ($file['name'] ?? 'unknown'));
         return ['path' => $existingPath, 'error' => 'File bukan gambar yang valid.'];
     }
 
