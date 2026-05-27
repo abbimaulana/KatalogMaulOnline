@@ -1,0 +1,30 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Force HTTPS (Cloudflare + shared hosting)
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteCond %{HTTP:CF-Visitor} !"\"scheme\":\"https\"" [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Block sensitive files
+<FilesMatch "(^\.|\.env|\.ini|\.log|\.sql|\.sqlite)$">
+    Require all denied
+</FilesMatch>
+
+# Block direct access to core/includes
+RewriteRule ^(core|includes)/ - [F,L]
+
+# Remove .php extension in URLs
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[?\s]
+RewriteRule ^ %1 [L,R=301]
+
+# Front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+ErrorDocument 404 /error/404.php
+ErrorDocument 403 /error/403.php
+ErrorDocument 500 /error/500.php
