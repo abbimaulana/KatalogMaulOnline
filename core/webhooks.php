@@ -92,6 +92,12 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
         || $numberLength < WHATSAPP_MIN_PHONE_LENGTH
         || $numberLength > WHATSAPP_MAX_PHONE_LENGTH
     ) {
+        error_log('WhatsApp Cloud API notification failed for order ' . $context . ': invalid admin number');
+        return;
+    }
+
+    if (str_starts_with($sanitizedAdminNumber, '0')) {
+        error_log('WhatsApp Cloud API notification failed for order ' . $context . ': admin number must include country code');
         return;
     }
 
