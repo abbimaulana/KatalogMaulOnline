@@ -77,8 +77,10 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
     }
 
     $sanitizedAdminNumber = preg_replace('/\D/', '', (string) $adminNumber);
+    $minLength = 10;
+    $maxLength = 15;
     $numberLength = strlen($sanitizedAdminNumber);
-    if ($sanitizedAdminNumber === '' || $numberLength < 10 || $numberLength > 15) {
+    if ($sanitizedAdminNumber === '' || $numberLength < $minLength || $numberLength > $maxLength) {
         return;
     }
 
