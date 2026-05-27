@@ -103,11 +103,11 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
     ]);
     $result = curl_exec($ch);
     if ($result === false) {
-        error_log('WhatsApp meta webhook failed for order ' . $context . ': ' . curl_error($ch));
+        error_log('WhatsApp Cloud API notification failed for order ' . $context . ': ' . curl_error($ch));
     } else {
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($status >= 400) {
-            error_log('WhatsApp meta webhook failed for order ' . $context . ': HTTP ' . $status . ' ' . $result);
+            error_log('WhatsApp Cloud API notification failed for order ' . $context . ': HTTP ' . $status . ' ' . $result);
         }
     }
     curl_close($ch);
