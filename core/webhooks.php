@@ -73,15 +73,20 @@ function send_discord(string $message, string $context = 'unknown'): void
 function send_whatsapp_meta(string $message, string $context = 'unknown'): void
 {
     $token = trim((string) config('whatsapp.cloud_api_access_token'));
-    $phoneId = config('whatsapp.cloud_api_phone_id');
+    $phoneId = trim((string) config('whatsapp.cloud_api_phone_id'));
     $adminNumber = config('whatsapp.admin_number');
 
-    if ($token === '' || !$phoneId || !$adminNumber) {
+    if ($token === '' || $phoneId === '' || !$adminNumber) {
         return;
     }
 
     if (preg_match('/[\r\n]/', $token)) {
         error_log('WhatsApp Cloud API notification failed for order ' . $context . ': invalid access token');
+        return;
+    }
+
+    if (!ctype_digit($phoneId)) {
+        error_log('WhatsApp Cloud API notification failed for order ' . $context . ': invalid phone id');
         return;
     }
 
