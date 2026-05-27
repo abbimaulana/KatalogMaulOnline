@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1120" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <title>Katalog · Maul Online Shop</title>
+</head>
+<body class="page" data-page="catalog">
+  <div id="loader"><div class="loader-ring"></div></div>
+  <div class="status-banner" data-store-banner></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <div>
+          <div>Maul Online Shop</div>
+          <small class="muted">Katalog PPOB Digital</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="/views/index.html" data-transition>Beranda</a>
+        <a href="/views/catalog.html" data-transition>Katalog</a>
+        <a href="/views/about.html" data-transition>Tentang</a>
+        <a href="/views/contact.html" data-transition>Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container">
+      <div class="section-title">
+        <div>
+          <h2>Produk Digital & PPOB</h2>
+          <p class="muted">Pilih layanan, isi data, lalu checkout dalam hitungan detik.</p>
+        </div>
+        <span class="badge-status" data-store-status>Toko Buka</span>
+      </div>
+      <div id="catalog-grid" class="grid"></div>
+    </section>
+  </main>
+
+  <div class="modal" id="checkout-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>Checkout PPOB</h3>
+          <p class="muted">Lengkapi data sebelum checkout.</p>
+        </div>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="banner-hero" style="margin-bottom:16px;">
+        <strong data-selected-product>Produk</strong>
+        <div class="price" data-selected-price>Rp0</div>
+      </div>
+      <form id="checkout-form" class="form-grid">
+        <div class="form-control">
+          <label for="buyer-name">Nama Pembeli</label>
+          <input id="buyer-name" type="text" placeholder="Nama lengkap" required />
+        </div>
+        <div class="form-control">
+          <label for="buyer-contact">Nomor WhatsApp</label>
+          <input id="buyer-contact" type="tel" placeholder="08xxxxxxxxxx" required />
+        </div>
+        <div class="form-control">
+          <label for="buyer-target">Nomor Tujuan / ID Game / ID Pelanggan</label>
+          <input id="buyer-target" type="text" placeholder="Masukkan ID tujuan" required />
+        </div>
+        <div class="form-control">
+          <label for="buyer-note">Catatan (opsional)</label>
+          <textarea id="buyer-note" rows="3" placeholder="Catatan tambahan"></textarea>
+        </div>
+        <button class="btn" type="submit">Checkout Sekarang</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    © 2026 Maul Online Shop. Proudly powered by GitHub, Cloudflare & Google.
+  </footer>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

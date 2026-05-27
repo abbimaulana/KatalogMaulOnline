@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1120" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <title>Maul Online Shop · Katalog PPOB Digital</title>
+</head>
+<body class="page" data-page="home">
+  <div id="loader"><div class="loader-ring"></div></div>
+  <div class="status-banner" data-store-banner></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <div>
+          <div>Maul Online Shop</div>
+          <small class="muted">Digital & PPOB Store</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="/views/index.html" data-transition>Beranda</a>
+        <a href="/views/catalog.html" data-transition>Katalog</a>
+        <a href="/views/about.html" data-transition>Tentang</a>
+        <a href="/views/contact.html" data-transition>Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <span class="badge">Blue Dark Experience</span>
+        <h1>Belanja PPOB & Produk Digital Serba Cepat, Aman, dan Aesthetic.</h1>
+        <p>Maul Online Shop menghadirkan katalog layanan digital dengan sistem checkout fleksibel, notifikasi otomatis multi-platform, dan tampilan neon biru yang modern.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn" href="/views/catalog.html" data-transition>Lihat Katalog</a>
+          <a class="btn btn-secondary" href="/views/contact.html" data-transition>Hubungi CS</a>
+        </div>
+      </div>
+      <div class="hero-card banner-hero">
+        <h3>Jam Operasional Toko</h3>
+        <p>Pantau status toko secara real-time. Checkout otomatis menyesuaikan waktu operasional agar transaksi tetap aman.</p>
+        <div class="badge-status" data-store-status>Toko Buka</div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-title">
+        <h2>Keunggulan Maul Online Shop</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="icon-wrap">⚡</div>
+          <h3>Checkout Instan</h3>
+          <p>Form otomatis dengan validasi cepat. Pesanan langsung masuk ke Google Sheets.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon-wrap">🔒</div>
+          <h3>Keamanan Serverless</h3>
+          <p>Cloudflare Worker menyembunyikan endpoint GAS dan menjaga API key tetap aman.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon-wrap">📲</div>
+          <h3>Notifikasi Multi-Platform</h3>
+          <p>WhatsApp, Telegram, dan Discord aktif bersamaan untuk respons cepat admin.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 Maul Online Shop. Proudly powered by GitHub, Cloudflare & Google.
+  </footer>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

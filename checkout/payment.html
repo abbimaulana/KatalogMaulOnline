@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1120" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <title>Pembayaran · Maul Online Shop</title>
+</head>
+<body class="page" data-page="checkout-payment">
+  <div id="loader"><div class="loader-ring"></div></div>
+  <div class="status-banner" data-store-banner></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-logo">M</div>
+        <div>
+          <div>Maul Online Shop</div>
+          <small class="muted">Checkout Pembayaran</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="/views/index.html" data-transition>Beranda</a>
+        <a href="/views/catalog.html" data-transition>Katalog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container">
+      <div class="section-title">
+        <h2>Rincian Pembayaran</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Detail Pesanan</h3>
+          <p>Kode: <strong data-order-code>-</strong></p>
+          <p>Produk: <strong data-order-product>-</strong></p>
+          <p>Harga: <strong data-order-price>-</strong></p>
+          <p>Nama: <strong data-order-buyer>-</strong></p>
+          <p>Target: <strong data-order-target>-</strong></p>
+          <p>Catatan: <strong data-order-note>-</strong></p>
+        </div>
+        <div class="info-card">
+          <h3>Metode Pembayaran</h3>
+          <img data-payment-qris src="/assets/images/placeholder.svg" alt="QRIS" />
+          <p>BSI: <strong data-payment-bsi>-</strong></p>
+          <p>DANA: <strong data-payment-dana>-</strong></p>
+          <p>OVO: <strong data-payment-ovo>-</strong></p>
+        </div>
+      </div>
+      <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn" data-checkout-button>Konfirmasi Pembayaran</button>
+        <a class="btn btn-secondary" href="/views/catalog.html" data-transition>Kembali ke Katalog</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 Maul Online Shop. Proudly powered by GitHub, Cloudflare & Google.
+  </footer>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
