@@ -61,6 +61,7 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
    - Edit `core/config.php`:
      - `db.host`, `db.name`, `db.user`, `db.pass`
      - `bots.telegram_token`, `bots.telegram_chat_id`, `bots.discord_webhook_url` (isi jika memakai bot)
+     - `whatsapp.admin_number`, `whatsapp.cloud_api_phone_id`, `whatsapp.cloud_api_access_token` (untuk notifikasi WA admin via Meta)
      - `payment.*` (rekening & QRIS)
      - `security.csrf_key` (**wajib isi** dengan string acak)
    - Opsional: set `app.base_url` jika ingin fixed URL.
@@ -103,13 +104,20 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
 2. Copy Webhook URL.
 3. Isi di `core/config.php`.
 
+### WhatsApp (Meta Cloud API)
+1. Buat aplikasi di **Meta Developers** (https://developers.facebook.com/apps) lalu tambahkan produk **WhatsApp**.
+2. Pastikan punya akun **Meta Business** dan nomor WhatsApp yang sudah terverifikasi di Cloud API.
+3. Ambil **Phone Number ID** serta **Access Token** permanen (System User token). Token dari Graph API Explorer bersifat sementara. System User token bisa dibuat lewat **Business Settings → Users → System Users** di Meta.
+4. Pastikan token memiliki izin `whatsapp_business_messaging` (dan `whatsapp_business_management` jika mengelola nomor).
+5. Isi `whatsapp.cloud_api_phone_id`, `whatsapp.cloud_api_access_token`, dan `whatsapp.admin_number` di `core/config.php`.
+
 ## Alur Checkout
 1. Pembeli isi form di `/catalog`.
 2. Sistem membuat order & mengecek `is_direct_payment`:
    - **Aktif** → `/checkout_payment`
    - **Nonaktif** → `/checkout_confirm`
 3. Setelah klik konfirmasi, sistem:
-   - Kirim notifikasi ke Telegram & Discord.
+   - Kirim notifikasi ke Telegram, Discord, & WhatsApp admin.
    - Redirect ke WA bot CS `6287872369848` dengan template pesan.
 
 ## Maintenance Mode
