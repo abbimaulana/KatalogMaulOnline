@@ -76,15 +76,15 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
         return;
     }
 
-    $target = preg_replace('/\D/', '', (string) $adminNumber);
-    if ($target === '') {
+    $sanitizedAdminNumber = preg_replace('/\D/', '', (string) $adminNumber);
+    if ($sanitizedAdminNumber === '') {
         return;
     }
 
     $url = 'https://graph.facebook.com/v19.0/' . $phoneId . '/messages';
     $payload = json_encode([
         'messaging_product' => 'whatsapp',
-        'to' => $target,
+        'to' => $sanitizedAdminNumber,
         'type' => 'text',
         'text' => ['body' => $message],
     ], JSON_UNESCAPED_UNICODE);
