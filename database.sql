@@ -47,4 +47,4 @@ CREATE TABLE orders (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO payment_settings (bank_name, account_name, account_number, qris_image) VALUES
-('BCA', 'Maul Online Shop', '1234567890', 'uploads/qris.png');
+('BCA', 'Maul Online Shop', '1234567890', NULL);

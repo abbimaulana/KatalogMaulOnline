@@ -8,7 +8,10 @@ function csrf_token(): string
         $seed = bin2hex(random_bytes(32));
         $key = (string) config('security.csrf_key', '');
         if ($key === '') {
-            $key = bin2hex(random_bytes(32));
+            if (empty($_SESSION['_csrf_key'])) {
+                $_SESSION['_csrf_key'] = bin2hex(random_bytes(32));
+            }
+            $key = $_SESSION['_csrf_key'];
         }
         $_SESSION['_token'] = hash_hmac('sha256', $seed, $key);
     }

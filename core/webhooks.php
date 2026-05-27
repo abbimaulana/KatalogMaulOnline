@@ -32,7 +32,10 @@ function send_telegram(string $message): void
         CURLOPT_CONNECTTIMEOUT => 5,
         CURLOPT_TIMEOUT => 10,
     ]);
-    curl_exec($ch);
+    $result = curl_exec($ch);
+    if ($result === false) {
+        error_log('Telegram webhook failed: ' . curl_error($ch));
+    }
     curl_close($ch);
 }
 
@@ -54,6 +57,9 @@ function send_discord(string $message): void
         CURLOPT_CONNECTTIMEOUT => 5,
         CURLOPT_TIMEOUT => 10,
     ]);
-    curl_exec($ch);
+    $result = curl_exec($ch);
+    if ($result === false) {
+        error_log('Discord webhook failed: ' . curl_error($ch));
+    }
     curl_close($ch);
 }

@@ -10,7 +10,9 @@ if (config('security.csrf_key') === '') {
     $securityWarnings[] = 'Isi security.csrf_key di core/config.php dengan string acak.';
 }
 
-$adminCount = (int) db()->query('SELECT COUNT(*) FROM admins')->fetchColumn();
+$stmt = db()->prepare('SELECT COUNT(*) FROM admins');
+$stmt->execute();
+$adminCount = (int) $stmt->fetchColumn();
 if ($adminCount === 0) {
     $securityWarnings[] = 'Belum ada akun admin. Tambahkan akun admin di tabel admins.';
 }

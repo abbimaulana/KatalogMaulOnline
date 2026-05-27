@@ -72,6 +72,7 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
      VALUES ('admin', 'HASIL_PASSWORD_HASH');
      ```
    - Gunakan PHP: `password_hash('password_baru', PASSWORD_DEFAULT)` untuk membuat hash.
+   - Contoh output hash: `$2y$10$wQ1r7l9p3zGk9...` (akan berbeda setiap kali).
 6. **Cloudflare (Strict SSL)**:
    - Aktifkan **Full (Strict)**.
    - Pastikan DNS mengarah ke InfinityFree.
