@@ -107,7 +107,7 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
 ### WhatsApp (Meta Cloud API)
 1. Buat aplikasi di **Meta Developers** (https://developers.facebook.com/apps) lalu tambahkan produk **WhatsApp**.
 2. Pastikan punya akun **Meta Business** dan nomor WhatsApp yang sudah terverifikasi di Cloud API.
-3. Ambil **Phone Number ID** serta **Access Token** permanen (System User token). Token dari Graph API Explorer bersifat sementara.
+3. Ambil **Phone Number ID** serta **Access Token** permanen (System User token). Token dari Graph API Explorer bersifat sementara. System User token bisa dibuat lewat **Business Settings → Users → System Users** di Meta.
 4. Pastikan token memiliki izin `whatsapp_business_messaging` (dan `whatsapp_business_management` jika mengelola nomor).
 5. Isi `whatsapp.cloud_api_phone_id`, `whatsapp.cloud_api_access_token`, dan `whatsapp.admin_number` di `core/config.php`.
 

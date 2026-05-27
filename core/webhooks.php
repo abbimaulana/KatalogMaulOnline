@@ -97,6 +97,10 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
         'type' => 'text',
         'text' => ['body' => $message],
     ], JSON_UNESCAPED_UNICODE);
+    if ($payload === false) {
+        error_log('WhatsApp Cloud API notification failed for order ' . $context . ': json encode failed - ' . json_last_error_msg());
+        return;
+    }
 
     $ch = curl_init($url);
     if ($ch === false) {
