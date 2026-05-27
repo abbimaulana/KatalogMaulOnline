@@ -105,9 +105,10 @@ Website katalog/e-commerce premium dengan dark theme ala WhatsApp Business Catal
 3. Isi di `core/config.php`.
 
 ### WhatsApp (Meta Cloud API)
-1. Buat aplikasi WhatsApp Cloud API di Meta.
-2. Ambil **Phone Number ID** dan **Access Token**.
-3. Isi `whatsapp.meta_phone_id`, `whatsapp.meta_token`, dan `whatsapp.admin_number` di `core/config.php`.
+1. Buat aplikasi di **Meta Developers** (https://developers.facebook.com/apps) lalu tambahkan produk **WhatsApp**.
+2. Pastikan punya akun **Meta Business** dan nomor WhatsApp yang sudah terverifikasi di Cloud API.
+3. Ambil **Phone Number ID** serta **Access Token** dengan izin `whatsapp_business_messaging`.
+4. Isi `whatsapp.meta_phone_id`, `whatsapp.meta_token`, dan `whatsapp.admin_number` di `core/config.php`.
 
 ## Alur Checkout
 1. Pembeli isi form di `/catalog`.
