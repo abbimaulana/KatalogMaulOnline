@@ -38,10 +38,6 @@ return [
         'account_number' => '1234567890',
         'qris_image' => 'uploads/qris.png',
     ],
-    'admin' => [
-        'default_username' => 'admin',
-        'default_password_hash' => '',
-    ],
     'whatsapp' => [
         'customer_bot' => '6287872369848',
         'admin_number' => '6287864865721',
