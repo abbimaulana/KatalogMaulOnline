@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 const WHATSAPP_MIN_PHONE_LENGTH = 10;
 const WHATSAPP_MAX_PHONE_LENGTH = 15;
+const WHATSAPP_NON_DIGIT_PATTERN = '/\D/';
 
 function notify_order(array $order): void
 {
@@ -79,7 +80,7 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
         return;
     }
 
-    $sanitizedAdminNumber = preg_replace('/\D/', '', (string) $adminNumber);
+    $sanitizedAdminNumber = preg_replace(WHATSAPP_NON_DIGIT_PATTERN, '', (string) $adminNumber);
     $numberLength = strlen($sanitizedAdminNumber);
     if (
         $sanitizedAdminNumber === ''
@@ -98,6 +99,10 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
     ], JSON_UNESCAPED_UNICODE);
 
     $ch = curl_init($url);
+    if ($ch === false) {
+        error_log('WhatsApp Cloud API notification failed for order ' . $context . ': curl init failed');
+        return;
+    }
     curl_setopt_array($ch, [
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => $payload,
