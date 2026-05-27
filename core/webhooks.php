@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+const WHATSAPP_MIN_PHONE_LENGTH = 10;
+const WHATSAPP_MAX_PHONE_LENGTH = 15;
+
 function notify_order(array $order): void
 {
     $message = build_wa_message($order);
@@ -77,10 +80,12 @@ function send_whatsapp_meta(string $message, string $context = 'unknown'): void
     }
 
     $sanitizedAdminNumber = preg_replace('/\D/', '', (string) $adminNumber);
-    $minLength = 10;
-    $maxLength = 15;
     $numberLength = strlen($sanitizedAdminNumber);
-    if ($sanitizedAdminNumber === '' || $numberLength < $minLength || $numberLength > $maxLength) {
+    if (
+        $sanitizedAdminNumber === ''
+        || $numberLength < WHATSAPP_MIN_PHONE_LENGTH
+        || $numberLength > WHATSAPP_MAX_PHONE_LENGTH
+    ) {
         return;
     }
 
